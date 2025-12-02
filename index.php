@@ -1,7 +1,6 @@
-<?php echo $_GET["name"];
-echo "<br>";
-echo $_GET["montant"];
-echo $_GET["descreption"];
+<?php 
+include'config.php';
+
 ?>
 
 <!DOCTYPE html>
@@ -12,7 +11,7 @@ echo $_GET["descreption"];
     <title>Smart Wallet</title>
 </head>
 <body>
-    <form action ="index.php" method="GET" >
+    <form action ="traitement.php" method="POST" >
         <label>Montant :</label>
         <input type="number" name="montant" step="0.01" required><br>
         <label>Descreption:</label>
