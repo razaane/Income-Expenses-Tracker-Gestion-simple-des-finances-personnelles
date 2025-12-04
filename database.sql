@@ -15,3 +15,5 @@ CREATE TABLE expenses (
     descreption TEXT NOT NULL
 );
 
+show databases;
+
