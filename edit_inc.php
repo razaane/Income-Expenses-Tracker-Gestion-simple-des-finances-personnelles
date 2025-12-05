@@ -1,27 +1,19 @@
 <?php
 require_once('config.php');
 
-// --------------------
-// POST: Update income
-// --------------------
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'], $_POST['montant'], $_POST['date'], $_POST['descreption'])) {
     $id = $_POST['id'];
     $montant = $_POST['montant'];
     $date = $_POST['date'];
     $descreption = $_POST['descreption'];
 
-    // Update query
     $stmt = $pdo->prepare("UPDATE incomes SET montant = ?, la_date = ?, descreption = ? WHERE id = ?");
     $stmt->execute([$montant, $date, $descreption, $id]);
 
-    // Redirect to the list page
     header("Location: affich_inc.php");
     exit;
 }
 
-// --------------------
-// GET: Fetch income to edit
-// --------------------
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
     $stmt = $pdo->prepare("SELECT * FROM incomes WHERE id = ?");

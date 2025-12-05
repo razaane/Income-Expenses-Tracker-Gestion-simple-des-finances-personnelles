@@ -9,14 +9,11 @@ require_once('config.php');
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Incomes Management — Your Smart Wallet</title>
 
-  <!-- Tailwind CDN with forms plugin -->
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 
-  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 
-  <!-- Tailwind config -->
   <script>
     tailwind.config = {
       darkMode: 'class',
@@ -48,7 +45,6 @@ require_once('config.php');
 <body class="font-display text-gray-800 bg-[color:var(--bg)] dark:bg-[color:var(--bg)]">
 
   <script>
-    // Dark mode toggle
     window.uiTheme = {
       toggle: function() {
         const root = document.documentElement;
@@ -60,7 +56,6 @@ require_once('config.php');
       }
     };
 
-    // Initial theme
     (function(){
       const saved = localStorage.getItem('ui-theme') ||
             (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
@@ -78,7 +73,6 @@ require_once('config.php');
 
   <div class="min-h-screen flex flex-col">
 
-    <!-- Header -->
     <header class="sticky top-0 z-30 backdrop-blur-sm bg-white/60 dark:bg-black/40 border-b border-gray-200 dark:border-gray-800">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-20">
@@ -97,20 +91,16 @@ require_once('config.php');
       </div>
     </header>
 
-    <!-- Main Content -->
     <main class="flex-1">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         
-        <!-- Page Title -->
         <div class="mb-6">
           <h1 class="text-3xl font-bold text-gray-900 dark:text-white">Incomes Management</h1>
           <p class="mt-2 text-sm text-gray-500 dark:text-[color:var(--muted)]">View and manage all your income transactions</p>
         </div>
 
-        <!-- Table Container -->
         <section class="rounded-2xl p-6 bg-[color:var(--card-bg)] border border-gray-100 dark:border-gray-800 shadow-subtle">
           
-          <!-- Table Header with Actions -->
           <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
             <h2 class="text-lg font-semibold text-gray-900 dark:text-white">All Incomes</h2>
             <div class="flex gap-2">
@@ -122,8 +112,6 @@ require_once('config.php');
               </a>
             </div>
           </div>
-
-          <!-- Responsive Table -->
           <div class="overflow-x-auto -mx-6 px-6">
             <table class="w-full text-left">
               <thead class="sticky top-0 bg-white dark:bg-[color:var(--card-bg)]">
@@ -176,8 +164,6 @@ require_once('config.php');
               </tbody>
             </table>
           </div>
-
-          <!-- Empty State (if no data) -->
           <?php if(empty($result_incomes)): ?>
             <div class="py-12 text-center">
               <span class="material-symbols-outlined text-6xl text-gray-300 dark:text-gray-700">inbox</span>
@@ -194,11 +180,9 @@ require_once('config.php');
 
       </div>
     </main>
-
-    <!-- Footer -->
     <footer class="border-t border-gray-100 dark:border-gray-800 bg-white/60 dark:bg-black/40 mt-auto">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 text-center text-sm text-gray-500 dark:text-[color:var(--muted)]">
-        © 2025 FinanceApp. All Rights Reserved. <a href="#" class="text-[color:var(--accent-light)] hover:underline">Privacy Policy</a>
+        © 2025 FinanceApp. All Rights Reserved. 
       </div>
     </footer>
 

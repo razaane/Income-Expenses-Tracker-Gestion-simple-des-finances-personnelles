@@ -2,17 +2,13 @@
 include "config.php";
 include "traitement.php";
 
-// Total Revenues
 $stmt_rev = $pdo->query("SELECT SUM(montant) AS total_rev FROM incomes");
 $total_rev = $stmt_rev->fetch(PDO::FETCH_ASSOC)['total_rev'];
-if(!$total_rev) $total_rev = 0; // si aucun revenu
-
-// Total Expenses
+if(!$total_rev) $total_rev = 0; 
 $stmt_exp = $pdo->query("SELECT SUM(montant) AS total_exp FROM expenses");
 $total_exp = $stmt_exp->fetch(PDO::FETCH_ASSOC)['total_exp'];
-if(!$total_exp) $total_exp = 0; // si aucun expense
+if(!$total_exp) $total_exp = 0; 
 
-// Balance
 $balance = $total_rev - $total_exp;
 ?>
 
@@ -22,15 +18,11 @@ $balance = $total_rev - $total_exp;
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Dashboard — Modernized</title>
-
-  <!-- Tailwind CDN with forms plugin -->
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 
-  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 
-  <!-- Tailwind config: desktop-first theme extension -->
   <script id="tailwind-config">
     tailwind.config = {
       darkMode: 'class',
@@ -38,9 +30,7 @@ $balance = $total_rev - $total_exp;
         extend: {
           fontFamily: { display: ['Manrope', 'sans-serif'] },
           colors: {
-            // light primary (used in light mode)
             primary: '#2563eb',
-            // neutral / cards - we will use Tailwind defaults for rest
           },
           borderRadius: { 'md-xl': '0.75rem', '2xl': '1rem' },
           boxShadow: {
@@ -53,23 +43,17 @@ $balance = $total_rev - $total_exp;
   </script>
 
   <style>
-    /* small helper for the material icons weight */
     .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
-    /* For the dark-mode custom accent: use mauve/pink gradient on CTAs in dark mode */
     :root { --card-bg: #ffffff; --bg: #f6f8f7; --muted: #6b7280; --accent-light: #2563eb; }
     .dark { --card-bg: #0f1720; --bg: #0b1210; --muted: #9db8a8; --accent-dark-from: #7c3aed; --accent-dark-to: #ec4899; }
-    /* small accessibility focus outline */
     :focus { outline: 2px solid transparent; outline-offset: 2px; }
     .focus-ring:focus { box-shadow: 0 0 0 4px rgba(37,99,235,0.12); border-color: rgba(37,99,235,0.6); }
-    /* preserve min-height like your original */
     body { min-height: max(884px, 100dvh); }
   </style>
 </head>
 <body class="font-display text-gray-800 bg-[color:var(--bg)] dark:bg-[color:var(--bg)]">
 
-  <!-- Small app.js (external could be used). This script handles dark toggle and modal sample. -->
   <script>
-    // Dark mode toggle
 window.uiTheme = {
   toggle: function() {
     const root = document.documentElement;
@@ -80,8 +64,6 @@ window.uiTheme = {
     if(icon) icon.textContent = isDark ? 'dark_mode' : 'light_mode';
   }
 };
-
-// Initial theme from localStorage or system
 (function(){
   const saved = localStorage.getItem('ui-theme') ||
         (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
@@ -89,7 +71,6 @@ window.uiTheme = {
   else document.documentElement.classList.add('light');
 })();
 
-// Event listener for toggle button
 document.addEventListener("click", function(e){
   const el = e.target.closest("[data-action]");
   if(!el) return;
@@ -110,20 +91,15 @@ document.addEventListener("click", function(e){
       document.getElementById(target).classList.add("hidden");
     }
   });
-    // Immediately-invoked to avoid global pollution
     (function () {
-      // Persisted theme in localStorage
       const root = document.documentElement;
       const themeKey = 'ui-theme';
       function applyTheme(theme) {
         if (theme === 'dark') root.classList.add('dark'), root.classList.remove('light');
         else root.classList.remove('dark'), root.classList.add('light');
       }
-      // init
       const saved = localStorage.getItem(themeKey) || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
       applyTheme(saved);
-
-      // expose toggle for button
       window.uiTheme = {
         toggle: function() {
           const isDark = document.documentElement.classList.contains('dark');
@@ -264,7 +240,6 @@ document.addEventListener("click", function(e) {
           </aside>
         </section>
 
-        <!-- Recent transactions list (kept structure, modernized table) -->
         <section class=" rounded-2xl p-6 bg-[color:var(--card-bg)] border border-gray-100 dark:border-gray-800 shadow-subtle mb-8">
           <div class="flex justify-between">
             <div class="flex items-center mb-4">
@@ -281,7 +256,6 @@ document.addEventListener("click", function(e) {
           </div>
           </div>
 
-          <!-- Transactions table (kept sample rows) -->
           <div class="overflow-x-auto">
             <table class="w-full text-left">
               <thead class="sticky top-0 bg-white dark:bg-[color:var(--card-bg)]/90">
@@ -320,20 +294,16 @@ document.addEventListener("click", function(e) {
           </div>
 
         </section>
-
-        <!-- Spacer bottom -->
         <div class="h-24"></div>
       </div>
     </main>
 
-    <!-- Footer -->
     <footer class="border-t border-gray-100 dark:border-gray-800 bg-white/60 dark:bg-black/40">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 text-center text-sm text-gray-500 dark:text-[color:var(--muted)]">
-        © 2025 FinanceApp. All Rights Reserved. <a href="#" class="text-[color:var(--accent-light)] hover:underline">Privacy Policy</a>
+        © 2025 FinanceApp. All Rights Reserved. 
       </div>
     </footer>
 
-    <!-- Floating Action Button (kept behavior) -->
     <div class="fixed bottom-6 right-6">
       <button aria-label="Add new" data-action="open-add" class="w-14 h-14 rounded-full shadow-lg transform hover:scale-105 transition"
               style="background: linear-gradient(90deg,var(--accent-light),#4f46e5); color: white;">
@@ -341,7 +311,6 @@ document.addEventListener("click", function(e) {
       </button>
     </div>
 
-    <!-- Modal (Add) - hidden by default -->
     <div id="modal-income" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
   <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" data-action="close" data-target="modal-income"></div>
   <div class="relative w-full max-w-lg rounded-2xl bg-[color:var(--card-bg)] p-6 shadow-lg border border-gray-100 dark:border-gray-800">
