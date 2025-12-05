@@ -23,7 +23,7 @@ require_once('config.php');
 
                 <td>
                     <!-- Edit Button -->
-                    <a href="edit_form_exp.php?id=<?php echo $row['id']?>">
+                    <a href="edit_exp.php?id=<?php echo $row['id']?>">
                         <button style="background:blue;color:white;padding:4px 8px;border:none;border-radius:4px;">
                             Edit
                         </button>

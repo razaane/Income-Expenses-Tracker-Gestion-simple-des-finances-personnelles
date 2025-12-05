@@ -1,6 +1,20 @@
 <?php
 include "config.php";
 include "traitement.php";
+include "config.php";
+
+// Total Revenues
+$stmt_rev = $pdo->query("SELECT SUM(montant) AS total_rev FROM incomes");
+$total_rev = $stmt_rev->fetch(PDO::FETCH_ASSOC)['total_rev'];
+if(!$total_rev) $total_rev = 0; // si aucun revenu
+
+// Total Expenses
+$stmt_exp = $pdo->query("SELECT SUM(montant) AS total_exp FROM expenses");
+$total_exp = $stmt_exp->fetch(PDO::FETCH_ASSOC)['total_exp'];
+if(!$total_exp) $total_exp = 0; // si aucun expense
+
+// Balance
+$balance = $total_rev - $total_exp;
 ?>
 
 <!DOCTYPE html>
@@ -141,19 +155,14 @@ document.addEventListener("click", function(e) {
         </div>
       </div>
     </header>
-
-    <!-- Main content -->
     <main class="flex-1">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-
-        <!-- Stats cards -->
-        <!-- Comment (FR): Section des cartes de stat — Total Revenues, Expenses, Balance -->
         <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
           <div class="rounded-2xl bg-[color:var(--card-bg)] p-6 border border-gray-100 dark:border-gray-800 shadow-subtle transition hover:shadow-lg">
             <div class="flex items-start justify-between gap-4">
               <div>
                 <p class="text-sm text-gray-500 dark:text-[color:var(--muted)]">Total Revenues</p>
-                <p class="mt-2 text-2xl font-bold text-gray-900 dark:text-white">$5,400.00</p>
+                <p class="mt-2 text-2xl font-bold text-gray-900 dark:text-white"> $<?= number_format($total_rev, 2) ?></p>
               </div>
               <div class="w-12 h-12 rounded-xl flex items-center justify-center bg-blue-50 dark:bg-gradient-to-br dark:from-[color:var(--accent-dark-from)] dark:to-[color:var(--accent-dark-to)]">
                 <span class="material-symbols-outlined text-blue-600 dark:text-white">payments</span>
@@ -165,7 +174,7 @@ document.addEventListener("click", function(e) {
             <div class="flex items-start justify-between gap-4">
               <div>
                 <p class="text-sm text-gray-500 dark:text-[color:var(--muted)]">Total Expenses</p>
-                <p class="mt-2 text-2xl font-bold text-gray-900 dark:text-white">$2,150.50</p>
+                <p class="mt-2 text-2xl font-bold text-gray-900 dark:text-white">$<?= number_format($total_exp, 2) ?></p>
               </div>
               <div class="w-12 h-12 rounded-xl flex items-center justify-center bg-red-50 dark:bg-red-900/30">
                 <span class="material-symbols-outlined text-red-600 dark:text-red-300">arrow_downward</span>
@@ -177,7 +186,7 @@ document.addEventListener("click", function(e) {
             <div class="flex items-start justify-between gap-4">
               <div>
                 <p class="text-sm text-gray-500 dark:text-[color:var(--muted)]">Current Balance</p>
-                <p class="mt-2 text-2xl font-bold text-[color:var(--accent-light)] dark:text-transparent bg-clip-text dark:bg-gradient-to-r dark:from-[color:var(--accent-dark-from)] dark:to-[color:var(--accent-dark-to)]">$3,249.50</p>
+                <p class="mt-2 text-2xl font-bold text-[color:var(--accent-light)] dark:text-transparent bg-clip-text dark:bg-gradient-to-r dark:from-[color:var(--accent-dark-from)] dark:to-[color:var(--accent-dark-to)]">$<?= number_format($balance, 2) ?></p>
               </div>
               <div class="w-12 h-12 rounded-xl flex items-center justify-center bg-green-50 dark:bg-green-900/30">
                 <span class="material-symbols-outlined text-green-600 dark:text-green-300">savings</span>
@@ -185,10 +194,7 @@ document.addEventListener("click", function(e) {
             </div>
           </div>
         </section>
-
-        <!-- Chart & quick actions -->
         <section class="grid grid-cols-1 xl:grid-cols-3 gap-6 mb-6">
-          <!-- Chart area -->
           <div class="xl:col-span-2 rounded-2xl p-6 bg-[color:var(--card-bg)] border border-gray-100 dark:border-gray-800 shadow-subtle">
             <div class="flex items-center justify-between mb-4">
               <h2 class="text-lg font-semibold text-gray-900 dark:text-white">Monthly Overview</h2>
@@ -197,9 +203,8 @@ document.addEventListener("click", function(e) {
                 <button class="px-3 py-1.5 rounded-lg bg-gray-100 dark:bg-white/6 text-sm text-gray-700 dark:text-[color:var(--muted)] focus-ring">All Categories</button>
               </div>
             </div>
-            <!-- Placeholder mini chart (bars) -->
             <div class="w-full h-56 flex items-end gap-3">
-              <!-- simple bars (static) -->
+  
               <div class="flex-1 flex flex-col items-center">
                 <div class="w-full rounded-t-xl bg-[color:var(--accent-light)]/30 dark:bg-gradient-to-b dark:from-[color:var(--accent-dark-from)] dark:to-[color:var(--accent-dark-to)]" style="height:48%"></div>
                 <span class="mt-2 text-xs text-gray-500 dark:text-[color:var(--muted)]">Week 1</span>

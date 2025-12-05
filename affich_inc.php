@@ -23,14 +23,14 @@ require_once('config.php');
 
                 <td>
                     <!-- Edit Button -->
-                    <a href="edit_form_ind.php?id=<?php echo $row['id']?>">
+                    <a href="edit_inc.php?id=<?php echo $row['id']?>">
                         <button style="background:blue;color:white;padding:4px 8px;border:none;border-radius:4px;">
                             Edit
                         </button>
                     </a>
 
                     <!-- Delete Button -->
-                    <a href="delete_inc.php?id=<?php echo $row['id']?>" onclick="return confirm('Delete this record?');">
+                    <a href="delete_inc.php?id=<?= $row['id']?>" onclick="return confirm('Delete this record?');">
                         <button style="background:red;color:white;padding:4px 8px;border:none;border-radius:4px;">
                             Delete
                         </button>

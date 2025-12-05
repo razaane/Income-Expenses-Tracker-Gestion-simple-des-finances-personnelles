@@ -1,7 +1,9 @@
 <?php
 require_once('config.php');
 
+// --------------------
 // POST: Update income
+// --------------------
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'], $_POST['montant'], $_POST['date'], $_POST['descreption'])) {
     $id = $_POST['id'];
     $montant = $_POST['montant'];
@@ -9,17 +11,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'], $_POST['montant
     $descreption = $_POST['descreption'];
 
     // Update query
-    $stmt = $pdo->prepare("UPDATE expenses SET montant = ?, la_date = ?, descreption = ? WHERE id = ?");
+    $stmt = $pdo->prepare("UPDATE incomes SET montant = ?, la_date = ?, descreption = ? WHERE id = ?");
     $stmt->execute([$montant, $date, $descreption, $id]);
 
     // Redirect to the list page
-    header("Location: affich_exp.php");
+    header("Location: affich_inc.php");
     exit;
 }
+
+// --------------------
 // GET: Fetch income to edit
+// --------------------
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
-    $stmt = $pdo->prepare("SELECT * FROM expenses WHERE id = ?");
+    $stmt = $pdo->prepare("SELECT * FROM incomes WHERE id = ?");
     $stmt->execute([$id]);
     $rs = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -36,7 +41,7 @@ if (isset($_GET['id'])) {
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Edit Expenses</title>
+<title>Edit Income</title>
 <style>
     body { background: #f0f2f5; font-family: Arial, sans-serif; }
     .edit-form {
