@@ -1,7 +1,6 @@
 <?php
 include "config.php";
 include "traitement.php";
-include "config.php";
 
 // Total Revenues
 $stmt_rev = $pdo->query("SELECT SUM(montant) AS total_rev FROM incomes");
@@ -70,6 +69,34 @@ $balance = $total_rev - $total_exp;
 
   <!-- Small app.js (external could be used). This script handles dark toggle and modal sample. -->
   <script>
+    // Dark mode toggle
+window.uiTheme = {
+  toggle: function() {
+    const root = document.documentElement;
+    const isDark = root.classList.toggle('dark');
+    root.classList.toggle('light', !isDark);
+    localStorage.setItem('ui-theme', isDark ? 'dark' : 'light');
+    const icon = document.querySelector("[data-action='toggle-theme'] span");
+    if(icon) icon.textContent = isDark ? 'dark_mode' : 'light_mode';
+  }
+};
+
+// Initial theme from localStorage or system
+(function(){
+  const saved = localStorage.getItem('ui-theme') ||
+        (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  if(saved === 'dark') document.documentElement.classList.add('dark'); 
+  else document.documentElement.classList.add('light');
+})();
+
+// Event listener for toggle button
+document.addEventListener("click", function(e){
+  const el = e.target.closest("[data-action]");
+  if(!el) return;
+  const action = el.dataset.action;
+  if(action==='toggle-theme') window.uiTheme.toggle();
+});
+
 
     document.addEventListener("click", function (e) {
     const action = e.target.getAttribute("data-action");
@@ -147,9 +174,10 @@ document.addEventListener("click", function(e) {
           </div>
 
           <div class="flex items-center gap-3">
-            <button data-action="toggle-theme" aria-label="Toggle theme" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-white/6 focus-ring">
-              <span class="material-symbols-outlined ">light_mode</span>
-            </button> 
+           <button data-action="toggle-theme" aria-label="Toggle theme" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-white/6 focus-ring">
+  <span class="material-symbols-outlined">light_mode</span>
+</button>
+
         
           </div>
         </div>
@@ -162,7 +190,7 @@ document.addEventListener("click", function(e) {
             <div class="flex items-start justify-between gap-4">
               <div>
                 <p class="text-sm text-gray-500 dark:text-[color:var(--muted)]">Total Revenues</p>
-                <p class="mt-2 text-2xl font-bold text-gray-900 dark:text-white"> $<?= number_format($total_rev, 2) ?></p>
+                <p class="mt-2 text-2xl font-bold text-green-700 dark:text-green-700"> $<?= number_format($total_rev, 2) ?></p>
               </div>
               <div class="w-12 h-12 rounded-xl flex items-center justify-center bg-blue-50 dark:bg-gradient-to-br dark:from-[color:var(--accent-dark-from)] dark:to-[color:var(--accent-dark-to)]">
                 <span class="material-symbols-outlined text-blue-600 dark:text-white">payments</span>
@@ -174,7 +202,7 @@ document.addEventListener("click", function(e) {
             <div class="flex items-start justify-between gap-4">
               <div>
                 <p class="text-sm text-gray-500 dark:text-[color:var(--muted)]">Total Expenses</p>
-                <p class="mt-2 text-2xl font-bold text-gray-900 dark:text-white">$<?= number_format($total_exp, 2) ?></p>
+                <p class="mt-2 text-2xl font-bold text-red-700 dark:text-red-700">$<?= number_format($total_exp, 2) ?></p>
               </div>
               <div class="w-12 h-12 rounded-xl flex items-center justify-center bg-red-50 dark:bg-red-900/30">
                 <span class="material-symbols-outlined text-red-600 dark:text-red-300">arrow_downward</span>
@@ -223,8 +251,6 @@ document.addEventListener("click", function(e) {
               </div>
             </div>
           </div>
-
-          <!-- Quick actions -->
           <aside class="rounded-2xl p-6 bg-[color:var(--card-bg)] border border-gray-100 dark:border-gray-800 shadow-subtle flex flex-col gap-4">
             <h3 class="text-xl mt-6 text-center font-semibold text-gray-900 dark:text-white">Quick Actions</h3>
             <div class="flex flex-col justify-center gap-6 mt-8">
