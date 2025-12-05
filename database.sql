@@ -16,4 +16,5 @@ CREATE TABLE expenses (
 );
 
 show databases;
+SELECT * FROM expenses WHERE id = 4;
 

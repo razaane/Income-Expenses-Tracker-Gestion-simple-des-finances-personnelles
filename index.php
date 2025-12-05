@@ -234,26 +234,20 @@ document.addEventListener("click", function(e) {
         </section>
 
         <!-- Recent transactions list (kept structure, modernized table) -->
-        <section class="rounded-2xl p-6 bg-[color:var(--card-bg)] border border-gray-100 dark:border-gray-800 shadow-subtle mb-8">
-          <div class="flex items-center justify-between mb-4">
+        <section class=" rounded-2xl p-6 bg-[color:var(--card-bg)] border border-gray-100 dark:border-gray-800 shadow-subtle mb-8">
+          <div class="flex justify-between">
+            <div class="flex items-center mb-4">
             <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Recent Transactions</h3>
-            <a class="text-sm text-[color:var(--accent-light)] hover:underline" href="#">View All</a>
           </div>
-
-          <!-- Filters row -->
-          <div class="flex flex-col sm:flex-row gap-3 items-start sm:items-center mb-4">
-            <div class="flex gap-2 w-full sm:w-auto">
-              <input aria-label="Search transactions" type="search" placeholder="Search" class="px-3 py-2 rounded-xl border border-gray-200 bg-white dark:bg-transparent w-full focus-ring" />
-              <select aria-label="Category" class="px-3 py-2 rounded-xl border border-gray-200 bg-white dark:bg-transparent focus-ring">
+          <div class="flex m:flex-row gap-3 items-start sm:items-center mb-4">
+            <div class="flex w-full sm:w-auto">
+              <select aria-label="Category" class="px-8 py-3 rounded-xl border border-gray-200 bg-white dark:bg-transparent focus-ring">
                 <option>All categories</option>
                 <option>Income</option>
                 <option>Expense</option>
               </select>
             </div>
-            <div class="ml-auto flex gap-2">
-              <input type="date" aria-label="Start date" class="px-3 py-2 rounded-xl border border-gray-200 bg-white dark:bg-transparent focus-ring" />
-              <input type="date" aria-label="End date" class="px-3 py-2 rounded-xl border border-gray-200 bg-white dark:bg-transparent focus-ring" />
-            </div>
+          </div>
           </div>
 
           <!-- Transactions table (kept sample rows) -->
@@ -262,7 +256,6 @@ document.addEventListener("click", function(e) {
               <thead class="sticky top-0 bg-white dark:bg-[color:var(--card-bg)]/90">
                 <tr>
                   <th class="px-4 py-3 text-sm font-medium text-gray-500 dark:text-[color:var(--muted)]">Description</th>
-                  <th class="px-4 py-3 text-sm font-medium text-gray-500 dark:text-[color:var(--muted)]">Category</th>
                   <th class="px-4 py-3 text-sm font-medium text-gray-500 dark:text-[color:var(--muted)] text-right">Amount</th>
                   <th class="px-4 py-3 text-sm font-medium text-gray-500 dark:text-[color:var(--muted)]">Date</th>
                 </tr>
@@ -270,56 +263,27 @@ document.addEventListener("click", function(e) {
               <tbody id="transactions-table-body">
                 <tr class="border-t border-gray-100 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">
                   <td class="px-4 py-4">
-                    <div class="flex items-center gap-3">
-                      <div class="w-10 h-10 rounded-lg bg-[color:var(--accent-light)]/10 dark:bg-[color:var(--accent-dark-from)]/20 flex items-center justify-center">
-                        <span class="material-symbols-outlined text-[color:var(--accent-light)] dark:text-white text-sm">shopping_cart</span>
-                      </div>
-                      <div>
-                        <p class="font-semibold text-gray-900 dark:text-white">Starbucks Coffee</p>
-                        <p class="text-xs text-gray-500 dark:text-[color:var(--muted)]">Food & Drink ・ Today</p>
-                      </div>
-                    </div>
+                    <p class="font-semibold text-gray-900 dark:text-white">Starbucks Coffee</p>
                   </td>
-                  <td class="px-4 py-4 text-sm text-gray-600 dark:text-[color:var(--muted)]">Food & Drink</td>
                   <td class="px-4 py-4 text-right font-semibold text-red-500">-$5.75</td>
                   <td class="px-4 py-4 text-sm text-gray-500 dark:text-[color:var(--muted)]">Dec 3, 2025</td>
                 </tr>
 
                 <tr class="border-t border-gray-100 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">
                   <td class="px-4 py-4">
-                    <div class="flex items-center gap-3">
-                      <div class="w-10 h-10 rounded-lg bg-green-50 dark:bg-green-900/20 flex items-center justify-center">
-                        <span class="material-symbols-outlined text-green-600 dark:text-green-300 text-sm">payments</span>
-                      </div>
-                      <div>
-                        <p class="font-semibold text-gray-900 dark:text-white">Monthly Salary</p>
-                        <p class="text-xs text-gray-500 dark:text-[color:var(--muted)]">Income ・ Yesterday</p>
-                      </div>
-                    </div>
+                    <p class="font-semibold text-gray-900 dark:text-white">Monthly Salary</p>
                   </td>
-                  <td class="px-4 py-4 text-sm text-gray-600 dark:text-[color:var(--muted)]">Income</td>
                   <td class="px-4 py-4 text-right font-semibold text-green-600">+$2,500.00</td>
                   <td class="px-4 py-4 text-sm text-gray-500 dark:text-[color:var(--muted)]">Dec 2, 2025</td>
                 </tr>
 
                 <tr class="border-t border-gray-100 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">
                   <td class="px-4 py-4">
-                    <div class="flex items-center gap-3">
-                      <div class="w-10 h-10 rounded-lg bg-[color:var(--accent-light)]/10 dark:bg-[color:var(--accent-dark-from)]/20 flex items-center justify-center">
-                        <span class="material-symbols-outlined text-[color:var(--accent-light)] dark:text-white text-sm">movie</span>
-                      </div>
-                      <div>
-                        <p class="font-semibold text-gray-900 dark:text-white">Netflix Subscription</p>
-                        <p class="text-xs text-gray-500 dark:text-[color:var(--muted)]">Entertainment ・ Oct 28</p>
-                      </div>
-                    </div>
+                    <p class="font-semibold text-gray-900 dark:text-white">Netflix Subscription</p>
                   </td>
-                  <td class="px-4 py-4 text-sm text-gray-600 dark:text-[color:var(--muted)]">Entertainment</td>
                   <td class="px-4 py-4 text-right font-semibold text-red-500">-$15.49</td>
                   <td class="px-4 py-4 text-sm text-gray-500 dark:text-[color:var(--muted)]">Oct 28, 2025</td>
                 </tr>
-
-                <!-- add 3–4 sample rows total (FR: these are static examples; replace with PHP loop) -->
               </tbody>
             </table>
           </div>

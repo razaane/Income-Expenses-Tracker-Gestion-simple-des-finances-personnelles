@@ -8,4 +8,7 @@ $pdo = new PDO("mysql:host=$host;dbname=$db",$user,$pass);
 }catch(PDOException $erreur){
     die("erreur de connexion:" . $erreur->getMessage());
 }
+$result_incomes = $pdo->query("SELECT * FROM incomes");
+$result_expenses = $pdo->query("SELECT * FROM expenses");
+?>
 
