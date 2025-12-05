@@ -515,7 +515,7 @@ for($month = 1; $month <= 12; $month++) {
             <label class="text-sm text-gray-600 dark:text-[color:var(--muted)]">Description</label>
             <textarea name="descreption_inc" class="h-20 w-full rounded-xl border border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-white px-3 py-2 focus-ring" required></textarea>
           </div>
-          <button type="submit" name="save_inc" class="px-4 py rounded-xl text-white" style="background: linear-gradient(90deg,var(--accent-light),#4f46e5);">Save</button>
+          <button type="submit" name="save_inc" class="px-4 py-2 rounded-xl text-white" style="background: linear-gradient(90deg,var(--accent-light),#4f46e5);">Save</button>
         </form>
               </form>
       </div>
